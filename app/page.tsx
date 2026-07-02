@@ -31,14 +31,14 @@ const packages = [
   {
     name: "Starter",
     usd: "$10",
-    robux: "TBD Robux",
+    robux: "1,400 Robux",
     unit: "1 Short",
     copy: "Includes captions, cuts, zooms, sound effects, and clean pacing."
   },
   {
     name: "Creator",
     usd: "$25",
-    robux: "TBD Robux",
+    robux: "4,000 Robux",
     unit: "3 Shorts",
     copy: "Best for creators who want consistent uploads.",
     featured: true
@@ -46,7 +46,7 @@ const packages = [
   {
     name: "Growth",
     usd: "$40",
-    robux: "TBD Robux",
+    robux: "6,500 Robux",
     unit: "5 Shorts",
     copy: "Best value for creators posting multiple times per week."
   }
@@ -98,7 +98,7 @@ function Button({
       rel={href.startsWith("http") ? "noreferrer" : undefined}
       whileHover={{ y: -3 }}
       whileTap={{ scale: 0.94 }}
-      className={`inline-flex items-center justify-center rounded-full border-2 border-black px-6 py-3 text-sm font-black uppercase tracking-wide transition ${
+      className={`inline-flex items-center justify-center rounded-full border-2 border-black px-7 py-4 text-base font-black uppercase tracking-wide transition ${
         variant === "dark"
           ? "bg-black text-white shadow-ink hover:shadow-none"
           : "bg-white text-black shadow-ink hover:bg-black hover:text-white hover:shadow-none"
@@ -116,7 +116,7 @@ function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.8 }}
-        className="mb-3 text-xs font-black uppercase tracking-[0.28em]"
+        className="mb-3 text-base font-black uppercase tracking-[0.16em] sm:text-lg"
       >
         {eyebrow}
       </motion.p>
@@ -257,13 +257,13 @@ function Nav() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((value) => !value)}
-          className="rounded-full border-2 border-black px-4 py-2 text-sm font-black md:hidden"
+          className="rounded-full border-2 border-black px-4 py-2 text-base font-black md:hidden"
         >
           Menu
         </button>
         <div className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="text-sm font-bold hover:underline">
+            <a key={item.href} href={item.href} className="text-base font-bold hover:underline">
               {item.label}
             </a>
           ))}
@@ -299,7 +299,7 @@ function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35 }}
-            className="mb-5 inline-flex rounded-full border-2 border-black bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.22em] shadow-ink"
+            className="mb-5 inline-flex rounded-full border-2 border-black bg-white px-5 py-3 text-base font-black uppercase tracking-[0.12em] shadow-ink"
           >
             High-retention shorts editing
           </motion.div>
@@ -307,7 +307,7 @@ function Hero() {
             initial={{ opacity: 0, y: 34, clipPath: "inset(100% 0 0 0)" }}
             animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" }}
             transition={{ duration: 0.9, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-5xl font-black leading-[0.98] tracking-tight sm:text-7xl sm:leading-[0.92] lg:text-8xl"
+            className="font-display text-6xl font-black leading-[0.98] tracking-tight sm:text-7xl sm:leading-[0.92] lg:text-8xl"
           >
             Made By Hxvac
           </motion.h1>
@@ -373,11 +373,11 @@ function Results() {
             <div className="font-display text-4xl font-black">
               <CountUp value={stat.value} suffix={stat.suffix} />
             </div>
-            <p className="mt-3 text-sm font-bold uppercase tracking-wide text-neutral-600">{stat.label}</p>
+            <p className="mt-3 text-base font-bold uppercase tracking-wide text-neutral-600">{stat.label}</p>
           </motion.div>
         ))}
       </div>
-      <p className="mx-auto mt-9 max-w-2xl text-center text-sm font-semibold text-neutral-600">
+      <p className="mx-auto mt-9 max-w-2xl text-center text-base font-semibold text-neutral-600">
         Statistics represent content I've contributed to through editing.
       </p>
     </section>
@@ -428,9 +428,9 @@ function Pricing() {
               key={item}
               type="button"
               onClick={() => setCurrency(item)}
-              className={`relative z-10 flex items-center gap-2 rounded-full px-5 py-3 text-sm font-black uppercase transition ${currency === item ? "text-white" : "text-black"}`}
+              className={`relative z-10 flex items-center gap-2 rounded-full px-6 py-3 text-base font-black uppercase transition ${currency === item ? "text-white" : "text-black"}`}
             >
-              <span className="grid h-6 w-6 place-items-center rounded-full border-2 border-current text-xs leading-none">
+              <span className="grid h-7 w-7 place-items-center rounded-full border-2 border-current text-sm leading-none">
                 {item === "usd" ? "$" : "R"}
               </span>
               {item === "usd" ? "USD" : "Robux"}
@@ -447,7 +447,7 @@ function Pricing() {
             className={`relative rounded-[1.75rem] border-2 border-black bg-white p-7 shadow-ink ${pkg.featured ? "lg:-mt-5" : ""}`}
           >
             {pkg.featured ? (
-              <span className="absolute -top-4 left-7 rounded-full border-2 border-black bg-black px-4 py-2 text-xs font-black uppercase tracking-wider text-white">
+              <span className="absolute -top-5 left-7 rounded-full border-2 border-black bg-black px-5 py-2 text-sm font-black uppercase tracking-wider text-white">
                 Popular
               </span>
             ) : null}
@@ -461,7 +461,7 @@ function Pricing() {
           </motion.article>
         ))}
       </div>
-      <p className="mx-auto mt-8 max-w-3xl text-center text-sm font-semibold text-neutral-600">
+      <p className="mx-auto mt-8 max-w-3xl text-center text-base font-semibold text-neutral-600">
         Full video creation or heavier edits may cost more depending on complexity.
       </p>
     </section>
@@ -492,7 +492,7 @@ function FeaturedWork() {
                 className="pointer-events-none h-full w-full scale-[1.03]"
               />
               <div className="pointer-events-none absolute inset-x-4 bottom-4 flex justify-center">
-                <span className="rounded-full border-2 border-white bg-black/70 px-4 py-2 text-sm font-black uppercase tracking-wider text-white backdrop-blur">
+                <span className="rounded-full border-2 border-white bg-black/70 px-4 py-2 text-base font-black uppercase tracking-wider text-white backdrop-blur">
                   Short {index + 1}
                 </span>
               </div>
@@ -501,7 +501,7 @@ function FeaturedWork() {
               href={short.url}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex w-full justify-center rounded-full border-2 border-black bg-white px-4 py-3 text-sm font-black uppercase tracking-wide transition hover:bg-black hover:text-white"
+              className="mt-4 inline-flex w-full justify-center rounded-full border-2 border-black bg-white px-4 py-3 text-base font-black uppercase tracking-wide transition hover:bg-black hover:text-white"
             >
               Watch on YouTube
             </a>
@@ -571,7 +571,7 @@ function FinalCta() {
         viewport={{ once: true, amount: 0.35 }}
         className="mx-auto max-w-6xl overflow-hidden rounded-[2rem] border-2 border-black bg-black px-6 py-16 text-center text-white shadow-softInk"
       >
-        <p className="mb-4 text-xs font-black uppercase tracking-[0.28em]">Ready when you are</p>
+        <p className="mb-4 text-base font-black uppercase tracking-[0.16em] sm:text-lg">Ready when you are</p>
         <h2 className="mx-auto max-w-3xl font-display text-4xl font-black leading-tight sm:text-6xl">
           Your next viral Short could start here.
         </h2>
@@ -582,12 +582,12 @@ function FinalCta() {
             rel="noreferrer"
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.94 }}
-            className="inline-flex rounded-full border-2 border-white bg-white px-8 py-4 text-sm font-black uppercase tracking-wide text-black shadow-[8px_8px_0_rgba(255,255,255,0.28)]"
+            className="inline-flex rounded-full border-2 border-white bg-white px-8 py-4 text-base font-black uppercase tracking-wide text-black shadow-[8px_8px_0_rgba(255,255,255,0.28)]"
           >
             Work With Me
           </motion.a>
         </div>
-        <p className="mt-10 text-sm font-semibold text-white/70">Made By Hxvac (c) 2026</p>
+        <p className="mt-10 text-base font-semibold text-white/70">Made By Hxvac (c) 2026</p>
       </motion.section>
     </footer>
   );
