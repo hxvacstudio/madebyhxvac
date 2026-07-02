@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const ctaUrl = "https://discord.gg/sAvYkhYpPY";
@@ -98,7 +98,7 @@ function Button({
       rel={href.startsWith("http") ? "noreferrer" : undefined}
       whileHover={{ y: -3 }}
       whileTap={{ scale: 0.94 }}
-      className={`inline-flex items-center justify-center rounded-full border-2 border-black px-7 py-4 text-base font-black uppercase tracking-wide transition ${
+      className={`inline-flex items-center justify-center rounded-full border-2 border-black px-8 py-5 text-lg font-black uppercase tracking-wide transition sm:text-xl ${
         variant === "dark"
           ? "bg-black text-white shadow-ink hover:shadow-none"
           : "bg-white text-black shadow-ink hover:bg-black hover:text-white hover:shadow-none"
@@ -116,7 +116,7 @@ function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.8 }}
-        className="mb-3 text-base font-black uppercase tracking-[0.16em] sm:text-lg"
+        className="mb-4 text-xl font-black uppercase tracking-[0.12em] sm:text-2xl"
       >
         {eyebrow}
       </motion.p>
@@ -126,7 +126,7 @@ function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
           whileInView={{ y: 0 }}
           viewport={{ once: true, amount: 0.8 }}
           transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-4xl font-black leading-tight sm:text-5xl"
+          className="font-display text-5xl font-black leading-tight sm:text-6xl"
         >
           {title}
         </motion.h2>
@@ -163,24 +163,34 @@ function LoadingScreen() {
     return () => window.clearTimeout(timer);
   }, []);
 
-  if (done) return null;
-
   return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="fixed inset-0 z-[100] grid place-items-center bg-white"
-    >
-      <motion.div
-        initial={{ scale: 0.82, rotate: -4, opacity: 0 }}
-        animate={{ scale: [0.82, 1.05, 1], rotate: [ -4, 2, 0], opacity: 1 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-        className="relative h-36 w-36 overflow-hidden rounded-[2rem] border-2 border-black bg-black p-3 shadow-ink"
-      >
-        <LogoMark />
-      </motion.div>
-    </motion.div>
+    <AnimatePresence>
+      {!done ? (
+        <motion.div
+          initial={{ y: 0 }}
+          exit={{ y: "-100%" }}
+          transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
+          className="fixed inset-0 z-[100] grid place-items-center border-b-2 border-black bg-white shadow-softInk"
+        >
+          <motion.div
+            initial={{ y: 18, scale: 0.82, rotate: -4, opacity: 0 }}
+            animate={{ y: 0, scale: [0.82, 1.08, 1], rotate: [-4, 2, 0], opacity: 1 }}
+            exit={{ y: -42, scale: 0.92, opacity: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            className="relative h-40 w-40 overflow-hidden rounded-[2rem] border-2 border-black bg-black p-3 shadow-ink sm:h-48 sm:w-48"
+          >
+            <LogoMark />
+          </motion.div>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute bottom-20 h-1 w-48 origin-left rounded-full bg-black sm:w-64"
+          />
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }
 
@@ -299,7 +309,7 @@ function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35 }}
-            className="mb-5 inline-flex rounded-full border-2 border-black bg-white px-5 py-3 text-base font-black uppercase tracking-[0.12em] shadow-ink"
+            className="mb-6 inline-flex rounded-full border-2 border-black bg-white px-6 py-4 text-lg font-black uppercase tracking-[0.1em] shadow-ink sm:text-xl"
           >
             High-retention shorts editing
           </motion.div>
@@ -307,7 +317,7 @@ function Hero() {
             initial={{ opacity: 0, y: 34, clipPath: "inset(100% 0 0 0)" }}
             animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" }}
             transition={{ duration: 0.9, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-6xl font-black leading-[0.98] tracking-tight sm:text-7xl sm:leading-[0.92] lg:text-8xl"
+            className="font-display text-7xl font-black leading-[0.96] tracking-tight sm:text-8xl sm:leading-[0.9] lg:text-9xl"
           >
             Made By Hxvac
           </motion.h1>
@@ -315,7 +325,7 @@ function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8 }}
-            className="mt-6 max-w-2xl text-xl font-semibold leading-relaxed text-neutral-700"
+            className="mt-7 max-w-2xl text-2xl font-semibold leading-relaxed text-neutral-700 sm:text-3xl"
           >
             High-retention video editing for creators who want people to actually watch.
           </motion.p>
@@ -333,10 +343,10 @@ function Hero() {
           initial={{ opacity: 0, scale: 0.84, rotate: 5 }}
           animate={{ opacity: 1, scale: 1, rotate: -2 }}
           transition={{ duration: 0.9, delay: 0.65, type: "spring" }}
-          className="relative mx-auto aspect-square w-full max-w-[430px] overflow-hidden rounded-[2rem] border-2 border-black bg-black p-5 shadow-ink"
+          className="relative mx-auto aspect-square w-full max-w-[480px] overflow-hidden rounded-[2rem] border-2 border-black bg-black p-5 shadow-ink"
         >
           <LogoMark />
-          <div className="absolute bottom-12 left-0 right-0 text-center font-display text-2xl font-black uppercase tracking-[0.22em] text-white sm:text-3xl">
+          <div className="absolute bottom-12 left-0 right-0 text-center font-display text-3xl font-black uppercase tracking-[0.22em] text-white sm:text-4xl">
             Hxvac
           </div>
         </motion.div>
@@ -368,16 +378,16 @@ function Results() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ delay: index * 0.06 }}
-            className="rounded-[1.5rem] border-2 border-black bg-white p-6 text-center shadow-ink"
+            className="rounded-[1.5rem] border-2 border-black bg-white p-7 text-center shadow-ink"
           >
-            <div className="font-display text-4xl font-black">
+            <div className="font-display text-5xl font-black lg:text-6xl">
               <CountUp value={stat.value} suffix={stat.suffix} />
             </div>
-            <p className="mt-3 text-base font-bold uppercase tracking-wide text-neutral-600">{stat.label}</p>
+            <p className="mt-4 text-lg font-black uppercase tracking-wide text-neutral-700">{stat.label}</p>
           </motion.div>
         ))}
       </div>
-      <p className="mx-auto mt-9 max-w-2xl text-center text-base font-semibold text-neutral-600">
+      <p className="mx-auto mt-10 max-w-3xl text-center text-xl font-semibold text-neutral-600">
         Statistics represent content I've contributed to through editing.
       </p>
     </section>
