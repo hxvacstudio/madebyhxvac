@@ -1,0 +1,18 @@
+Upload the CONTENTS of this folder to GitHub.
+
+Important:
+- The hidden .github folder must be uploaded too.
+- GitHub Actions needs this exact file path:
+  .github/workflows/deploy.yml
+
+If Windows hides .github:
+1. In File Explorer, turn on View > Hidden items.
+2. Confirm this folder contains .github.
+3. Drag everything in this folder into GitHub's upload page.
+
+If GitHub still does not upload .github:
+1. On GitHub, click Add file > Create new file.
+2. Name the file exactly:
+   .github/workflows/deploy.yml
+3. Paste the contents from DEPLOY-YML-BACKUP.txt.
+4. Commit changes.
